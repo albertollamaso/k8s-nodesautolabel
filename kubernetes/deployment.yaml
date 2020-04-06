@@ -1,0 +1,21 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: node-label-watcher
+  labels:
+    app: node-label-watcher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-label-watcher
+  template:
+    metadata:
+      labels:
+        app: node-label-watcher
+    spec:
+      serviceAccountName: nodewatcher
+      containers:
+      - name: master
+        image: albertollamas8131/k8snodelabelwatcher
+        imagePullPolicy: Always
